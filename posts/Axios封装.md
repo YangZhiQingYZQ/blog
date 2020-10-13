@@ -3,7 +3,7 @@
  * @Description: axios封装
  * @Date: 2020-10-13 14:33:54
  * @LastEditors: YZQ
- * @LastEditTime: 2020-10-13 16:45:11
+ * @LastEditTime: 2020-10-13 16:48:58
 -->
 
 # Axios 封装
@@ -29,7 +29,7 @@ import store from "@/store"; // vue状态管理仓库
 ```
 
 ## 说明
-![项目文件结构](https://github.com/YangZhiQingYZQ/blog/posts/image/Axios封装/0.png)
+![项目文件结构](https://github.com/YangZhiQingYZQ/blog/blob/master/image/Axios%E5%B0%81%E8%A3%85/0.png)
 
 
 ## 封装思路
