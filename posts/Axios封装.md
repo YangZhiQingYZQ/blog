@@ -3,7 +3,7 @@
  * @Description: axios封装
  * @Date: 2020-10-13 14:33:54
  * @LastEditors: YZQ
- * @LastEditTime: 2020-10-13 16:48:58
+ * @LastEditTime: 2020-10-13 17:19:21
 -->
 
 # Axios 封装
@@ -31,6 +31,7 @@ import store from "@/store"; // vue状态管理仓库
 ## 说明
 ![项目文件结构](https://github.com/YangZhiQingYZQ/blog/blob/master/image/Axios%E5%B0%81%E8%A3%85/0.png)
 
+![封装的api文件说明]()
 
 ## 封装思路
 
@@ -44,9 +45,9 @@ import store from "@/store"; // vue状态管理仓库
 
 ```javascript
 if (process.env.NODE_ENV == "development") {
-  const baseURL = "https://www.baidu.com";
+  const baseURL = "https://www.development.com";
 } else if (process.env.NODE_ENV == "debug") {
-  const baseURL = "https://www.ceshi.com";
+  const baseURL = "https://www.debug.com";
 } else if (process.env.NODE_ENV == "production") {
   const baseURL = "https://www.production.com";
 }
