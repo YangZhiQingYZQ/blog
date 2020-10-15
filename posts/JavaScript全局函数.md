@@ -35,4 +35,5 @@ JavaScript中只有global全局对象，并没有window全局对象，window对�
 ## 参考
 
 菜鸟教程：[JavaScript 全局属性/函数](https://www.runoob.com/jsref/jsref-obj-global.html)
+
 JavaScript高级程序设计
