@@ -10,7 +10,22 @@
 
 ## 介绍
 
-主要用于 vue 中
+根据官方介绍，Axios是一个基于promise的HTTP库，可以用在浏览器和node.js中；
+
+其特性如下：
+
+* 从浏览器中创建XMLHttpRequests
+* 从node.js创建http请求
+* 支持Promise API
+* 拦截请求和响应
+* 转换请求数据和响应数据
+* 取消请求
+* 自动转换JSON数据
+* 客户端支持防御XSRF
+
+可以说Vue项目中基本上都是使用了Axios来发送请求
+
+官网链接如下：http://www.axios-js.com/zh-cn/docs/
 
 ## 安装
 
@@ -29,9 +44,9 @@ import store from "@/store"; // vue状态管理仓库
 ```
 
 ## 说明
-![项目文件结构](https://github.com/YangZhiQingYZQ/blog/blob/master/image/Axios%E5%B0%81%E8%A3%85/0.png)
+![示例项目文件结构](https://github.com/YangZhiQingYZQ/blog/blob/master/image/Axios%E5%B0%81%E8%A3%85/0.png)
 
-![封装的api文件说明]()
+![封装的api文件说明](https://github.com/YangZhiQingYZQ/blog/blob/master/posts/api%E8%AF%B7%E6%B1%82%E5%B0%81%E8%A3%85.md)
 
 ## 封装思路
 

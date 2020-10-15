@@ -1,10 +1,3 @@
-<!--
- * @Author: YZQ
- * @Description: 
- * @Date: 2020-10-13 16:54:28
- * @LastEditors: YZQ
- * @LastEditTime: 2020-10-13 17:06:18
--->
 # Api 封装
 
 ## 介绍
