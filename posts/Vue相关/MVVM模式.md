@@ -1,0 +1,19 @@
+# MVVM模式
+
+Model-View-ViewModel（MVVM）是一个软件架构设计模式，由微软WPF和Silverlight的架构师Ken Cooper和Ted Peters开发，是一种简化用户界面的时间驱动编程方式。由John Gossman（同样也是WPF和Silverlight的架构师）于2005年在他的博客上发表
+
+MVVM源自于经典的Model-View-Controller（MVC）模式，MVVM的出现促进了前端开发与后端业务逻辑的分离，极大地提高了前端开发效率，MVVM的核心是ViewModel层，它就是像一个中转站（value converter），负责转换Model中的数据对象来让数据变得更容易管理和使用，该层向上与视图层进行双向数据绑定，向下与Model层通过接口请求进行数据交互，起承上启下的作用；
+
+### View层
+
+View是视图层，也就是用户界面。前端主要由HTML和CSS来构建
+
+### Model层
+
+Model是指数据模型，泛指后端进行的各种业务逻辑处理和数据操控，对于前端来说就是后端提供的api接口
+
+### ViewModel层
+
+ViewModel是由前端开发人员组织生成和维护视图数据层。在这一层，前端开发者对从后端获取的Model数据进行转换处理，做二次封装，以生成符合View层使用预期的视图数据模型。需要注意的是ViewModel所封装出来的数据模型包括视图的状态和行为两部分，而Model层的数据模型只包含状态的，比如页面的这块展示什么，而页面加载进来时发生什么，点击这一块发生什么，这一块滚动时发生什么都属于视图行为（交互），视图状态和行为都封装在了ViewModel里。这样的封装使得ViewModel可以完整去描述View层
+
+MVVM框架实现了双向绑定，这样ViewModel的内容会实时展现在View层，前端开发者再也不必低效又麻烦地通过操纵DOM去更新视图，MVVM框架已经把最脏最累的一块做好了，我们开发者只需要处理和维护ViewModel，更新数据视图就会自动得到相应更新。这样View层展现的不是Model层的数据，而是ViewModel的数据，由ViewModel负责与Model层交互，这就完全解耦了View层和Model层，这个解耦是至关重要的，它是前后端分离方案实施的重要一环
