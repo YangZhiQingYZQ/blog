@@ -1,0 +1,83 @@
+# event模块
+
+实现node中回调函数的机制，node中的回调函数其实是内部使用了观察者模式；
+
+## 观察者模式
+	定义了对象间一种一对多的依赖关系，当目标对象Subject发生改变时，所有依赖它的对象Observer都会得到通知
+
+## 实现代码
+
+```javascript
+function EventEmitter(){
+	this.events = new Map();
+}
+// 需要实现的一些方法：
+// addListener、removeListener、once、removeAllListeners、emit
+
+// 模拟实现addlistener方法
+const warpCallback = (fn,once = false) => ({callback:fn,once});
+
+EventEmitter.prototype.addListener = function(type,fn,once = false){
+	const hanlder = this.events.get(type);
+	if(!hanlder){
+		// 没有绑定type事件
+		this.events.set(type,wrapCallback(fn,once));
+	}else if(hanlder && typeof hanlder.callback === 'function'){
+		// 目前type事件只有一个回调
+		this.events.set(type,[hanlder,wrapCallback(fn,once)]);
+	}else{
+		// 目前type事件数 >= 2
+		hander.push(wrapCallback(fn,once));
+	}
+}
+
+// 模拟实现removeListener
+EventEmitter.prototype.removeListener = function(type,listener){
+	const hanlder = this.events.get(type);
+	if(!hanlder) return;
+	if(!Array.isArray(this.events)){
+		if(hanlder.callback === listener.callback){
+			this.events.delete(type)
+		}else{
+			return;
+		} 
+	}
+	for(let i = 0; i < hanlder.length; i++){
+		hanlder.splce(i,1);
+		i--;
+		if(hanlder.length === 1){
+			this.events.set(type,hanlder[0])
+		}
+	}
+}
+
+// 模拟实现once方法
+EventEmitter.prototype.once = function(type,listener){
+	this.addListener(type,listener,true);
+}
+
+// 模拟实现emit方法
+eventEmitter.prototype.emit = function(type,...args){
+	const hanlder = this.events.get(type);
+	if(!hanlder) return;
+	if(Array.isArray(hanlder)){
+		hanlder.forEach(item => {
+			item.callback.apply(this,args);
+			if(item.once){
+				this.removeListener(type,item);
+			}
+		})
+	}else {
+		hanlder.callback.apply(this,args);
+		if(hanlder.once) this.events.delete(type)
+	}
+	return true;
+}
+
+// 模拟实现removeAllListeners
+EventEmitter.prototype.removeAllListeners = function(type){
+	const hanlder = this.events.get(type);
+	if(!hanlder) return;
+	this.events.delete(type);
+}
+```
