@@ -1,32 +1,5 @@
 # vue零散点
 
-## v-show与v-if的区别
-
-### v-if
-v-if是真正的条件渲染，因为它会确保在切换过程中条件快内的事件监听器和子组件适当地被销毁和重建；是惰性的；当初始渲染条件为假，则什么也不做，直到条件改变为真时，才会开始渲染条件块
-
-### v-show
-不管初始条件是否为真，元素都会进行渲染，并且只是简单基于CSS的dispaly属性进行切换
-
-### 应用场景
-v-if适用于在运行时很少改变条件，不需要频繁切换的场景；而v-show则相反，适用于需要非常频繁切换条件的场景
-
-
-## computed和watch的区别和应用场景
-
-### computed
-
-计算属性：依赖其它依赖它的属性值，并且computed的值有缓存，只有它依赖的属性值发生改变，下一次获取computed的值时才会重新计算computed的值；
-
-### watch
-
-观察者属性：更多的是监听作用，类似于某些数据的监听回调，每当监听的数据变化都会执行回调进行后续操作；
-
-### 应用场景
-
-* 当我们需要进行数值计算，或者依赖于其他数据时，应该使用computed，因为可以利用computed的缓存特性，避免每次获取值时，都要重新计算
-
-* 当我们需要在数据变化时执行异步或者开销较大的操作时，应该使用watch，使用watch选项允许我们执行异步操作（访问一个API），限制我们执行该操作的频率，并在我们得到最终结果前，设置中间状态。这些都是计算属性无法做到的
 
 
 
@@ -35,36 +8,7 @@ v-if适用于在运行时很少改变条件，不需要频繁切换的场景；�
 
 
 
-## Vue中的key的作用
 
-key是Vue中vnode的唯一标记，通过这个key，我们的diff操作可以更准确、更快速。
-
-Vue的diff过程可以概括为：oadCh和newCh各有两个头围的变量oldStartIndex、oldEndIndex和newStartIndex、newEndIndex，它们会新节点和旧节点进行两两对比，即一共有4中比较方式：
-
-* newStartInde和oldStartIndex
-* newEndIndex和oldEndIndex
-* newStartIndex和oldEndIndex
-* newEndIndex和oldStartIndex
-
-如果以上4种比较都没有匹配，如果设置了key，就会用key再进行比较，在比较的过程中，遍历会往中间靠，一旦StartIdx > EndIdx 就表明oldCh和newCh至少有一个已经遍历完了，就会结束比较。
-
-所以Vue中的key的作用是：key是为Vue中vnode的唯一标记，通过这个key，我们的diff操作可以更准确、更快速
-
-更准确：因为带key就不是就地复用了，在sameNode函数a.key === b.key对比中可以避免就地复用的情况。所以会更加准确
-
-更快速：利用key的唯一性生成map对象来获取对应节点，比遍历放射式更快，源码如下：
-
-``` javascript
-function createKeyToOldIdx(children,beginIdx,endIdx){
-	let i , key;
-	const map = {};
-	for(i = beginIdx; i <= endidx; ++i){
-		key = children[i].key;
-		if(isDef(key)) map[key] = i;
-	}
-	return map;
-}
-```
 
 
 
