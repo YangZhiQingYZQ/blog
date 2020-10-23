@@ -1,5 +1,14 @@
 # 关于instanceof
 
+用于检测构造函数的prototype属性是否出现在某个实例对象的原型链上
+
+## 存在的问题
+
+使用instanceof进行判断时，只能证明当时判断的结果，因为javascript是一种动态的语言，所以检测对象的原型链有可能因为有意或无意的赋值导致原型链被更改；更改的场景如下：
+
+* 构造函数的原型对象更改后，通过此构造函数创建出来的对象就有可能导致之前的判断错误
+* 虽然目前的ES规范中，我们只能读取对象的原型而不能改变它，但借助非标准的__proto__伪属性是可以更改对象的原型的
+
 ## 存在的问题
 
 此次操作符存在多个全局作用域（一个页面包含多个框架的）的情况下，因为原生的构造函数都在格子的window对象中，所以在另一个框架中定义的对象，在不同框架中返回不同（比如Array，SON）
@@ -30,3 +39,23 @@ function IsValueType(val,type){
 
 * 对于IE中以COM对象实现的任何函数，Object.prototype.toString()都不会正常返回[object Fuction]，因为它们并不是原生的javascript函数
 * 这种技巧是基于Object.prototype.toString()实现的，由于javascript是一种动态的语言，此函数本身可能会被修改，所以必须确保此函数是未被修改的原生版本；
+* 此方法只能判断此值是否属于某个原生类型，无法判断是否由哪个构造函数创建
+
+
+## 模拟instanceof 
+
+instanceof运算符用于检测构造函数的prototype属性是否出现在某个实例对象的原型链上
+
+```javascript
+const myInstanceof = (left,right){
+	// 基本类型都返回false
+	if(typeof left !== 'object' || left == null) return false;
+	let proto = Object.getPrototypeOf(left);
+	while(true){
+		if(proto === null) return false;
+		if(proto == right.prototype) return true;
+		proto = Object.getPrototypeOf(proto);
+	}
+
+}
+```
